@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "936594792996",
+    "project_id": "rumber-d3575",
+    "storage_bucket": "rumber-d3575.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936594792996:android:43857093e76fea16652eb1",
+        "android_client_info": {
+          "package_name": "com.example.rumber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936594792996-eab2cg5rc6d8s9o2gf92dagome11l9j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYqRPIexb0KP5MNeHZKXB_6FmTJoPMtpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936594792996-eab2cg5rc6d8s9o2gf92dagome11l9j3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
