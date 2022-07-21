@@ -234,5 +234,3 @@ class _UpdateIndexState extends State<UpdateIndex> {
     return Container();
   }
 }
-
-//test
