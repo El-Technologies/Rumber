@@ -32,7 +32,10 @@ class _StartGameState extends State<StartGame> {
       newBal = false,
       scoreMessage = true,
       entered = false;
-  int numberOfOccurrence = 0, balance = 200, animatedBalance = 200;
+  int numberOfOccurrence = 0,
+      initBalance = 200,
+      balance = 200,
+      animatedBalance = 200;
 
   bool playedMoneySong = false, hasShownShowCaseView = false;
 
@@ -326,18 +329,29 @@ class _StartGameState extends State<StartGame> {
 
   Future<void> animateB(int amount) async {
     for (int i = 0; i < amount.abs(); i++) {
-      await Future.delayed(const Duration(milliseconds: 1),
-          () => (amount > 0) ? animatedBalance++ : animatedBalance--);
+      await Future.delayed(
+          const Duration(microseconds: 500),
+          () => (amount > 0)
+              ? setState(() {
+                  animatedBalance++;
+                })
+              : setState(() {
+                  animatedBalance--;
+                }));
     }
   }
 
   Future<void> animateHB(int amount) async {
     for (int i = 0; i < amount.abs(); i++) {
       await Future.delayed(
-          const Duration(milliseconds: 1),
+          const Duration(microseconds: 500),
           () => (amount > 0)
-              ? animatedHighestBalance++
-              : animatedHighestBalance--);
+              ? setState(() {
+                  animatedHighestBalance++;
+                })
+              : setState(() {
+                  animatedHighestBalance--;
+                }));
     }
   }
 
@@ -1018,10 +1032,10 @@ class _StartGameState extends State<StartGame> {
                                           child:
                                               LiquidCircularProgressIndicator(
                                             value: play
-                                                ? balance / highestScore
+                                                ? animatedBalance / highestScore
                                                 : balance - 100,
                                             valueColor: AlwaysStoppedAnimation(
-                                                balance > highestScore
+                                                animatedBalance > highestScore
                                                     ? Colors.purple
                                                     : changePBColor()),
                                             backgroundColor: Colors.black26,
@@ -1029,7 +1043,7 @@ class _StartGameState extends State<StartGame> {
                                             borderWidth: 1,
                                             direction: Axis.vertical,
                                             center: Text(
-                                              "${formatCurrency.format(play ? balance : balance - 100)} / ${formatCurrency.format(highestScore)}",
+                                              "${formatCurrency.format(play ? animatedBalance : animatedBalance - 100)} / ${formatCurrency.format(highestScore)}",
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -1076,7 +1090,7 @@ class _StartGameState extends State<StartGame> {
                                                               20),
                                                       child: AutoSizeText(
                                                         formatCurrency.format(
-                                                            highestBalance),
+                                                            animatedHighestBalance),
                                                         style: const TextStyle(
                                                           fontSize: 30,
                                                         ),
@@ -1132,7 +1146,7 @@ class _StartGameState extends State<StartGame> {
                                                               (play)
                                                                   ? formatCurrency
                                                                       .format(
-                                                                          balance)
+                                                                          animatedBalance)
                                                                   : "Debt",
                                                               style:
                                                                   const TextStyle(
