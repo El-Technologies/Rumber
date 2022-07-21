@@ -603,22 +603,23 @@ class _StartGameState extends State<StartGame> {
     ),
   );
 
-  Dialog keyPad(size, context) {
+  keyPad(size, context) {
     double width = size.width / 5;
     return Dialog(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      insetPadding: const EdgeInsets.all(0),
       elevation: 100,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black54,
       alignment: AlignmentDirectional.bottomCenter,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-        ),
+      child: SizedBox(
         height: 300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GestureDetector(
                   child: AnimatedContainer(
@@ -707,7 +708,7 @@ class _StartGameState extends State<StartGame> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GestureDetector(
                   child: AnimatedContainer(
@@ -796,7 +797,7 @@ class _StartGameState extends State<StartGame> {
               ],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GestureDetector(
                   child: AnimatedContainer(

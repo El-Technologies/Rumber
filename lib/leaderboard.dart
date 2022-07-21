@@ -12,7 +12,6 @@ class LeaderBoardScores extends StatefulWidget {
 }
 
 class _LeaderBoardScoresState extends State<LeaderBoardScores> {
-
   @override
   void initState() {
     super.initState();
@@ -108,6 +107,7 @@ class _LeaderBoardScoresState extends State<LeaderBoardScores> {
                 ],
               ),
             ),
+            const SizedBox(height: 5),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.only(top: 20),

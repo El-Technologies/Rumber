@@ -162,17 +162,11 @@ class _MenuPageState extends State<MenuPage>
                                               topRight: Radius.circular(50))),
                                       child: Row(
                                         children: [
-                                          Image(
-                                            image: const AssetImage(
+                                          const Image(
+                                            image: AssetImage(
                                                 "assets/images/play.png"),
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .07,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .07,
+                                            width: 40,
+                                            height: 40,
                                           ),
                                           const SizedBox(width: 10),
                                           Text(
@@ -231,17 +225,11 @@ class _MenuPageState extends State<MenuPage>
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           const SizedBox(width: 10),
-                                          Image(
-                                            image: const AssetImage(
+                                          const Image(
+                                            image: AssetImage(
                                                 "assets/images/compliant.png"),
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .07,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .07,
+                                            width: 40,
+                                            height: 40,
                                           ),
                                         ],
                                       ),
@@ -278,17 +266,11 @@ class _MenuPageState extends State<MenuPage>
                                                   Radius.circular(50))),
                                       child: Row(
                                         children: [
-                                          Image(
-                                            image: const AssetImage(
+                                          const Image(
+                                            image: AssetImage(
                                                 "assets/images/competition.png"),
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .07,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .07,
+                                            width: 40,
+                                            height: 40,
                                           ),
                                           const SizedBox(width: 10),
                                           Text(
@@ -339,17 +321,11 @@ class _MenuPageState extends State<MenuPage>
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           const SizedBox(width: 10),
-                                          Image(
-                                            image: const AssetImage(
+                                          const Image(
+                                            image: AssetImage(
                                                 "assets/images/log-out.png"),
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .07,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .07,
+                                            width: 40,
+                                            height: 40,
                                           ),
                                         ],
                                       ),

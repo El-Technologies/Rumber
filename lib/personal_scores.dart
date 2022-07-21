@@ -79,66 +79,68 @@ class _PersonalScoresState extends State<PersonalScores> {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * .7,
-                    child: ListView.separated(
-                      itemCount: scoreList.length,
-                      itemBuilder: (_, int index) {
-                        int itemCount = scoreList.length;
-                        int reversedIndex = itemCount - 1 - index;
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 15),
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            border: Border.all(color: Colors.yellow),
-                            borderRadius: const BorderRadius.horizontal(
-                                right: Radius.circular(50),
-                                left: Radius.circular(10)),
-                          ),
-                          child: ListTile(
-                            leading: Card(
-                              elevation: 20,
-                              color: scoreColors(int.parse(
-                                  scoreList[reversedIndex][0].toString())),
-                              shape: const CircleBorder(),
-                              child: SizedBox(
-                                height: 50,
-                                width: 50,
-                                child: Center(
-                                    child: Text(formatCurrency.format(int.parse(
-                                        scoreList[reversedIndex][0]
-                                            .toString())))),
+                  Expanded(
+                    child: SizedBox(
+                      child: ListView.separated(
+                        itemCount: scoreList.length,
+                        itemBuilder: (_, int index) {
+                          int itemCount = scoreList.length;
+                          int reversedIndex = itemCount - 1 - index;
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 15),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              border: Border.all(color: Colors.yellow),
+                              borderRadius: const BorderRadius.horizontal(
+                                  right: Radius.circular(50),
+                                  left: Radius.circular(10)),
+                            ),
+                            child: ListTile(
+                              leading: Card(
+                                elevation: 20,
+                                color: scoreColors(int.parse(
+                                    scoreList[reversedIndex][0].toString())),
+                                shape: const CircleBorder(),
+                                child: SizedBox(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                      child: Text(formatCurrency.format(
+                                          int.parse(scoreList[reversedIndex][0]
+                                              .toString())))),
+                                ),
                               ),
+                              title: const Text(
+                                "Tap to view",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              trailing: Text(
+                                scoreList[reversedIndex][1].toString(),
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return displayScore(
+                                      formatCurrency.format(int.parse(
+                                          "${scoreList[reversedIndex][0]}")),
+                                      "${scoreList[reversedIndex][1]}",
+                                    );
+                                  },
+                                );
+                              },
                             ),
-                            title: const Text(
-                              "Tap to view",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                            trailing: Text(
-                              scoreList[reversedIndex][1].toString(),
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return displayScore(
-                                    formatCurrency.format(int.parse(
-                                        "${scoreList[reversedIndex][0]}")),
-                                    "${scoreList[reversedIndex][1]}",
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      separatorBuilder: (_, index) =>
-                          const SizedBox(height: 10),
+                          );
+                        },
+                        separatorBuilder: (_, index) =>
+                            const SizedBox(height: 10),
+                      ),
                     ),
                   ),
+                  const SizedBox(height: 20),
                 ],
               )
             : const Center(
