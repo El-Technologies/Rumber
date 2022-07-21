@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:glowstone/glowstone.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -81,4 +82,25 @@ leaderboardPositions(int index) {
         ),
       );
   }
+}
+
+connectToInternet(context) {
+  return Center(
+    child: Glowstone(
+      radius: 20,
+      velocity: 10,
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2,
+        height: MediaQuery.of(context).size.width / 2,
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.yellow,
+        ),
+        child: const Center(
+          child: Text("Please connect to the internet"),
+        ),
+      ),
+    ),
+  );
 }

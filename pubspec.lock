@@ -338,6 +338,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  glowstone:
+    dependency: "direct main"
+    description:
+      name: glowstone
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   graphs:
     dependency: transitive
     description:

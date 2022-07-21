@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:getwidget/components/progress_bar/gf_progress_bar.dart';
 import 'package:getwidget/types/gf_progress_type.dart';
 import 'package:intl/intl.dart';
@@ -35,17 +38,45 @@ class _StartGameState extends State<StartGame> {
 
   bool playedMoneySong = false, hasShownShowCaseView = false;
 
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
   @override
   void initState() {
     if (myBox.get("hasShownShowCaseView") == null)
       myBox.put("hasShownShowCaseView", false);
     hasShownShowCaseView = myBox.get("hasShownShowCaseView");
+    initConnectivity();
+
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  Future<void> initConnectivity() async {
+    late ConnectivityResult result;
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException {
+      return;
+    }
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    setState(() {
+      _connectionStatus = result;
+    });
   }
 
   void generateRandomNumbers() {
@@ -952,217 +983,234 @@ class _StartGameState extends State<StartGame> {
               colors: [Colors.deepOrange, Colors.yellow],
             ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SafeArea(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 50),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, Colors.deepOrange],
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: Showcase(
-                                    key: three,
-                                    showcaseBackgroundColor: Colors.lightGreen,
-                                    textColor: Colors.white,
-                                    description:
-                                        "This shows how close you are to beating your personal best",
-                                    contentPadding: const EdgeInsets.all(20),
-                                    shapeBorder: const CircleBorder(),
-                                    child: LiquidCircularProgressIndicator(
-                                      value: play
-                                          ? balance / highestScore
-                                          : balance - 100,
-                                      valueColor: AlwaysStoppedAnimation(
-                                          balance > highestScore
-                                              ? Colors.purple
-                                              : changePBColor()),
-                                      backgroundColor: Colors.black26,
-                                      borderColor: Colors.black26,
-                                      borderWidth: 1,
-                                      direction: Axis.vertical,
-                                      center: Text(
-                                        "${formatCurrency.format(play ? balance : balance - 100)} / ${formatCurrency.format(highestScore)}",
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+          child: _connectionStatus == ConnectivityResult.none
+              ? connectToInternet(context)
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SafeArea(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 50),
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Colors.transparent, Colors.deepOrange],
                             ),
-                            Column(
-                              children: [
-                                Card(
-                                  color: Colors.amberAccent,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SizedBox(
-                                      height: 100,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              const AutoSizeText(
-                                                "Highest Balance:      ",
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                ),
-                                                minFontSize: 20,
-                                                maxLines: 1,
-                                              ),
-                                              Showcase(
-                                                key: one,
-                                                showcaseBackgroundColor:
-                                                    Colors.yellow,
-                                                description:
-                                                    "This shows the maximum balance you've gotten. \nYour final highest balance becomes your score after the game is over",
-                                                contentPadding:
-                                                    const EdgeInsets.all(20),
-                                                child: AutoSizeText(
-                                                  formatCurrency
-                                                      .format(highestBalance),
-                                                  style: const TextStyle(
-                                                    fontSize: 30,
-                                                  ),
-                                                  minFontSize: 20,
-                                                  maxLines: 1,
-                                                ),
-                                              ),
-                                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 100,
+                                        height: 100,
+                                        child: Showcase(
+                                          key: three,
+                                          showcaseBackgroundColor:
+                                              Colors.lightGreen,
+                                          textColor: Colors.white,
+                                          description:
+                                              "This shows how close you are to beating your personal best",
+                                          contentPadding:
+                                              const EdgeInsets.all(20),
+                                          shapeBorder: const CircleBorder(),
+                                          child:
+                                              LiquidCircularProgressIndicator(
+                                            value: play
+                                                ? balance / highestScore
+                                                : balance - 100,
+                                            valueColor: AlwaysStoppedAnimation(
+                                                balance > highestScore
+                                                    ? Colors.purple
+                                                    : changePBColor()),
+                                            backgroundColor: Colors.black26,
+                                            borderColor: Colors.black26,
+                                            borderWidth: 1,
+                                            direction: Axis.vertical,
+                                            center: Text(
+                                              "${formatCurrency.format(play ? balance : balance - 100)} / ${formatCurrency.format(highestScore)}",
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
                                           ),
-                                          Row(
-                                            children: [
-                                              const AutoSizeText(
-                                                "Current Balance: ",
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                ),
-                                                minFontSize: 20,
-                                                maxLines: 1,
-                                              ),
-                                              Card(
-                                                color: changeBalanceColor(),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: Showcase(
-                                                  key: two,
-                                                  showcaseBackgroundColor:
-                                                      Colors.yellow,
-                                                  description:
-                                                      "This shows the current balance you've gotten so far",
-                                                  contentPadding:
-                                                      const EdgeInsets.all(20),
-                                                  shapeBorder:
-                                                      RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      50)),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Container(
-                                                      padding:
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Card(
+                                        color: Colors.amberAccent,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SizedBox(
+                                            height: 100,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    const AutoSizeText(
+                                                      "Highest Balance:      ",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                      ),
+                                                      minFontSize: 20,
+                                                      maxLines: 1,
+                                                    ),
+                                                    Showcase(
+                                                      key: one,
+                                                      showcaseBackgroundColor:
+                                                          Colors.yellow,
+                                                      description:
+                                                          "This shows the maximum balance you've gotten. \nYour final highest balance becomes your score after the game is over",
+                                                      contentPadding:
                                                           const EdgeInsets.all(
-                                                              5),
+                                                              20),
                                                       child: AutoSizeText(
-                                                        (play)
-                                                            ? formatCurrency
-                                                                .format(balance)
-                                                            : "Debt",
+                                                        formatCurrency.format(
+                                                            highestBalance),
                                                         style: const TextStyle(
-                                                          fontSize: 25,
+                                                          fontSize: 30,
                                                         ),
                                                         minFontSize: 20,
                                                         maxLines: 1,
                                                       ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
-                                              ),
-                                            ],
+                                                Row(
+                                                  children: [
+                                                    const AutoSizeText(
+                                                      "Current Balance: ",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                      ),
+                                                      minFontSize: 20,
+                                                      maxLines: 1,
+                                                    ),
+                                                    Card(
+                                                      color:
+                                                          changeBalanceColor(),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                      child: Showcase(
+                                                        key: two,
+                                                        showcaseBackgroundColor:
+                                                            Colors.yellow,
+                                                        description:
+                                                            "This shows the current balance you've gotten so far",
+                                                        contentPadding:
+                                                            const EdgeInsets
+                                                                .all(20),
+                                                        shapeBorder:
+                                                            RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            50)),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(8.0),
+                                                          child: Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(5),
+                                                            child: AutoSizeText(
+                                                              (play)
+                                                                  ? formatCurrency
+                                                                      .format(
+                                                                          balance)
+                                                                  : "Debt",
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 25,
+                                                              ),
+                                                              minFontSize: 20,
+                                                              maxLines: 1,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          if (display) displayResult(context),
+                          if (play)
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (play) showKeyPad(size, context);
+                                });
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                height: 100,
+                                child: Center(
+                                  child: Container(
+                                    margin: const EdgeInsets.all(10),
+                                    height: 100,
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                          colors: [Colors.grey, Colors.white]),
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Tap here to enter a number from 1 to 9",
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .04,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                Column(
-                  children: [
-                    if (display) displayResult(context),
-                    if (play)
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            if (play) showKeyPad(size, context);
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          height: 100,
-                          child: Center(
-                            child: Container(
-                              margin: const EdgeInsets.all(10),
-                              height: 100,
-                              width: 300,
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                    colors: [Colors.grey, Colors.white]),
-                                borderRadius: BorderRadius.circular(100),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Tap here to enter a number from 1 to 9",
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width * .04,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
