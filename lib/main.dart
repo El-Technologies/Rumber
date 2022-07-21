@@ -4,7 +4,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:rumber/score_board.dart'; 
+import 'package:rumber/score_board.dart';
 import 'package:rumber/data.dart';
 import 'package:rumber/instructions.dart';
 import 'package:rumber/login.dart';
@@ -161,19 +161,22 @@ class _MenuPageState extends State<MenuPage>
                                               bottomLeft: Radius.circular(20),
                                               topRight: Radius.circular(50))),
                                       child: Row(
-                                        children: const [
-                                          Image(
+                                        children: [
+                                          const Image(
                                             image: AssetImage(
                                                 "assets/images/play.png"),
                                             width: 40,
                                             height: 40,
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           Text(
                                             "Start",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 30,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .08,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ],
@@ -210,16 +213,19 @@ class _MenuPageState extends State<MenuPage>
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
-                                        children: const [
+                                        children: [
                                           Text(
                                             "How to Play",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 30,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .08,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          SizedBox(width: 10),
-                                          Image(
+                                          const SizedBox(width: 10),
+                                          const Image(
                                             image: AssetImage(
                                                 "assets/images/compliant.png"),
                                             width: 40,
@@ -259,19 +265,22 @@ class _MenuPageState extends State<MenuPage>
                                               bottomRight:
                                                   Radius.circular(50))),
                                       child: Row(
-                                        children: const [
-                                          Image(
+                                        children: [
+                                          const Image(
                                             image: AssetImage(
                                                 "assets/images/competition.png"),
                                             width: 40,
                                             height: 40,
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           Text(
                                             "Score Board",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 30,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .08,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ],
@@ -300,16 +309,19 @@ class _MenuPageState extends State<MenuPage>
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
-                                        children: const [
+                                        children: [
                                           Text(
                                             "Quit",
                                             style: TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 30,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .08,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          SizedBox(width: 10),
-                                          Image(
+                                          const SizedBox(width: 10),
+                                          const Image(
                                             image: AssetImage(
                                                 "assets/images/log-out.png"),
                                             width: 40,
