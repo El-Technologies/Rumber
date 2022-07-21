@@ -49,7 +49,6 @@ class _ProceedState extends State<Proceed> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                const Divider(),
                 Container(
                   padding: const EdgeInsets.all(30),
                   decoration: const BoxDecoration(
@@ -76,7 +75,7 @@ class _ProceedState extends State<Proceed> {
                     ],
                   ),
                 ),
-                const Divider(),
+                const SizedBox(height: 5),
                 Container(
                   padding: const EdgeInsets.all(30),
                   decoration: const BoxDecoration(
@@ -101,7 +100,7 @@ class _ProceedState extends State<Proceed> {
                     ],
                   ),
                 ),
-                const Divider(),
+                const SizedBox(height: 5),
                 Container(
                   padding: const EdgeInsets.all(30),
                   decoration: const BoxDecoration(
@@ -127,7 +126,7 @@ class _ProceedState extends State<Proceed> {
                     ],
                   ),
                 ),
-                const Divider(),
+                const SizedBox(height: 5),
                 Container(
                   padding: const EdgeInsets.all(30),
                   decoration: const BoxDecoration(
@@ -152,7 +151,7 @@ class _ProceedState extends State<Proceed> {
                     ],
                   ),
                 ),
-                const Divider(),
+                const SizedBox(height: 5),
                 Container(
                   padding: const EdgeInsets.all(30),
                   decoration: const BoxDecoration(
@@ -174,6 +173,28 @@ class _ProceedState extends State<Proceed> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(30),
                         child: Image.asset("assets/images/about-to-lose.png"),
+                      ),
+                      SizedBox(height: 40),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  padding: const EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                    color: Colors.purple[200],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        "The game will last for about an hour and the first person on the leaderboard "
+                        "gets whatever he or she earned in the game as his or her highest score."
+                        "\n\nGood luck!",
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 40),
                     ],

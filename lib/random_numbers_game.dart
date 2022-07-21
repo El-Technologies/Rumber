@@ -1146,10 +1146,10 @@ class _StartGameState extends State<StartGame> {
                               child: Center(
                                 child: Text(
                                   "Tap here to enter a number from 1 to 9",
+                                  maxLines: 1,
                                   style: TextStyle(
                                     fontSize:
-                                        MediaQuery.of(context).size.width *
-                                            .055,
+                                        MediaQuery.of(context).size.width * .04,
                                   ),
                                 ),
                               ),
