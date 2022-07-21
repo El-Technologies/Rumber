@@ -1046,7 +1046,7 @@ class _StartGameState extends State<StartGame> {
                                             borderWidth: 1,
                                             direction: Axis.vertical,
                                             center: Text(
-                                              "${formatCurrency.format(play ? animatedBalance : animatedBalance - 100)} / ${formatCurrency.format(highestScore)}",
+                                              "${formatCurrency.format(play ? balance : balance - 100)} / ${formatCurrency.format(highestScore)}",
                                               style: const TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -1093,7 +1093,7 @@ class _StartGameState extends State<StartGame> {
                                                               20),
                                                       child: AutoSizeText(
                                                         formatCurrency.format(
-                                                            animatedHighestBalance),
+                                                            highestBalance),
                                                         style: const TextStyle(
                                                           fontSize: 30,
                                                         ),
@@ -1149,7 +1149,7 @@ class _StartGameState extends State<StartGame> {
                                                               (play)
                                                                   ? formatCurrency
                                                                       .format(
-                                                                          animatedBalance)
+                                                                          balance)
                                                                   : "Debt",
                                                               style:
                                                                   const TextStyle(

@@ -58,9 +58,6 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage>
     with WidgetsBindingObserver, TickerProviderStateMixin {
   bool scoreMessage = true;
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
-  final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
@@ -83,11 +80,6 @@ class _MenuPageState extends State<MenuPage>
     if (myBox.get("userId") == null) myBox.put("userId", docUser.id);
     userId = myBox.get("userId");
 
-    initConnectivity();
-
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
-
     super.initState();
   }
 
@@ -95,26 +87,6 @@ class _MenuPageState extends State<MenuPage>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-  }
-
-  Future<void> initConnectivity() async {
-    late ConnectivityResult result;
-    try {
-      result = await _connectivity.checkConnectivity();
-    } on PlatformException {
-      return;
-    }
-    if (!mounted) {
-      return Future.value(null);
-    }
-
-    return _updateConnectionStatus(result);
-  }
-
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-    setState(() {
-      _connectionStatus = result;
-    });
   }
 
   @override
@@ -138,9 +110,7 @@ class _MenuPageState extends State<MenuPage>
                       colors: [Colors.deepOrangeAccent, Colors.deepOrange],
                     ),
                   ),
-                  child: _connectionStatus == ConnectivityResult.none
-                      ? connectToInternet(context)
-                      : Center(
+                  child: Center(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
