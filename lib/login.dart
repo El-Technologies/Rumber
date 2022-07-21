@@ -71,7 +71,7 @@ class _LoginState extends State<Login> {
     FocusScopeNode currentfocus = FocusScope.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.deepOrange,
       body: _connectionStatus == ConnectivityResult.none
           ? connectToInternet(context)
           : Form(
@@ -87,9 +87,6 @@ class _LoginState extends State<Login> {
                     colors: [
                       Colors.deepOrangeAccent,
                       Colors.deepOrange,
-                      Colors.red,
-                      Colors.lightBlue,
-                      Colors.blue,
                     ],
                   ),
                 ),
