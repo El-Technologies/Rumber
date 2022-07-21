@@ -19,8 +19,6 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   cloud_firestore: ^3.3.0
-  getwidget: ^3.0.1
-  provider: ^6.0.3
   liquid_progress_indicator: ^0.4.0
   showcaseview: ^1.1.7
   glowstone: ^0.0.2
@@ -37,7 +35,6 @@ flutter:
   assets:
     - assets/images/
     - assets/launcher/launcher.jpg
-    - assets/music/bgmusic.mp3
     - assets/effects/correct.mp3
     - assets/effects/loser-mattrobes.mp3
     - assets/effects/tf_nemesis.mp3

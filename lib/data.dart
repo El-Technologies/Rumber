@@ -98,7 +98,10 @@ connectToInternet(context) {
           color: Colors.yellow,
         ),
         child: const Center(
-          child: Text("Please connect to the internet"),
+          child: Text(
+            "Please connect to the internet",
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     ),
