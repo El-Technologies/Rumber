@@ -60,6 +60,7 @@ class _MenuPageState extends State<MenuPage>
   bool scoreMessage = true;
   ConnectivityResult _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
@@ -83,7 +84,10 @@ class _MenuPageState extends State<MenuPage>
     userId = myBox.get("userId");
 
     initConnectivity();
-    
+
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+
     super.initState();
   }
 
