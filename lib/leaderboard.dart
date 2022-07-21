@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rumber/data.dart';
 import 'package:rumber/random_numbers_game.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 class LeaderBoardScores extends StatefulWidget {
   const LeaderBoardScores({Key? key}) : super(key: key);
@@ -18,14 +17,10 @@ class LeaderBoardScores extends StatefulWidget {
 class _LeaderBoardScoresState extends State<LeaderBoardScores> {
   ConnectivityResult _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
     initConnectivity();
-
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     super.initState();
   }
 

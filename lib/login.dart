@@ -27,14 +27,10 @@ class _LoginState extends State<Login> {
 
   ConnectivityResult _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
     initConnectivity();
-
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     super.initState();
   }
 
@@ -42,7 +38,7 @@ class _LoginState extends State<Login> {
     late ConnectivityResult result;
     try {
       result = await _connectivity.checkConnectivity();
-    } on PlatformException catch (e) {
+    } on PlatformException {
       return;
     }
     if (!mounted) {

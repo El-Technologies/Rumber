@@ -7,8 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:getwidget/components/progress_bar/gf_progress_bar.dart';
-import 'package:getwidget/types/gf_progress_type.dart';
 import 'package:intl/intl.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'package:rumber/data.dart';
@@ -40,17 +38,14 @@ class _StartGameState extends State<StartGame> {
 
   ConnectivityResult _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
   @override
   void initState() {
-    if (myBox.get("hasShownShowCaseView") == null)
+    if (myBox.get("hasShownShowCaseView") == null) {
       myBox.put("hasShownShowCaseView", false);
+    }
     hasShownShowCaseView = myBox.get("hasShownShowCaseView");
     initConnectivity();
-
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
     super.initState();
   }
 
