@@ -314,10 +314,8 @@ class _StartGameState extends State<StartGame> {
       ),
     ),
     content: Text(
-      "You can view your scores or keep playing\n"
-      "Play as many times as you can from 8:00 pm to 9:00 pm\n\n"
-      "Make sure to send a screenshot of your highest score between "
-      "9:00 pm to 9:20 pm",
+      "You can view your scores or keep playing. "
+      "Play as many times as you can from 8:00 pm to 9:00 pm\n",
       textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.white,
