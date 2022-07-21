@@ -122,7 +122,7 @@ class _StartGameState extends State<StartGame> {
                               color: randomNumberColor(randomNumbers[0]),
                               child: Container(
                                 padding:
-                                    const EdgeInsets.fromLTRB(10, 13, 10, 16),
+                                    const EdgeInsets.fromLTRB(10, 13, 10, 13),
                                 child: Text(
                                   "${randomNumbers[0]}",
                                   style: const TextStyle(
@@ -1143,10 +1143,14 @@ class _StartGameState extends State<StartGame> {
                                     colors: [Colors.grey, Colors.white]),
                                 borderRadius: BorderRadius.circular(100),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   "Tap here to enter a number from 1 to 9",
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            .055,
+                                  ),
                                 ),
                               ),
                             ),
