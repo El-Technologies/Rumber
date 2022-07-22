@@ -10,6 +10,7 @@ String username = "";
 late String userId;
 bool isLoggedIn = false;
 late int input, userIndex, nextUserIndex;
+int numberOfUsers = 0;
 List scoreList = [],
     leaderboardList = [
       ["User1", 1000],

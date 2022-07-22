@@ -161,69 +161,84 @@ class _LeaderBoardScoresState extends State<LeaderBoardScores> {
                             if (snapshot.hasError) {
                               return const Text("Something went wrong");
                             } else if (snapshot.hasData) {
-                              return ListView.builder(
-                                itemCount: snapshot.data!.docs.length,
-                                itemBuilder: (_, int index) {
-                                  DocumentSnapshot user =
-                                      snapshot.data!.docs[index];
-                                  if (index == 0) {
-                                    userScore = user["score"];
-                                    userIndex = index;
-                                  } else {
-                                    if (userScore != user["score"]) {
-                                      userScore = user["score"];
-                                      userIndex = index;
-                                    } else {
-                                      userIndex = userIndex;
-                                    }
-                                  }
+                              numberOfUsers = snapshot.data!.docs.length;
+                              return Column(
+                                children: [
+                                  Text(
+                                    "${numberOfUsers > 0 ? "$numberOfUsers" : "No"} ${numberOfUsers > 1 ? "players" : "player"} on leaderboard",
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: numberOfUsers,
+                                      itemBuilder: (_, int index) {
+                                        DocumentSnapshot user =
+                                            snapshot.data!.docs[index];
+                                        if (index == 0) {
+                                          userScore = user["score"];
+                                          userIndex = index;
+                                        } else {
+                                          if (userScore != user["score"]) {
+                                            userScore = user["score"];
+                                            userIndex = index;
+                                          } else {
+                                            userIndex = userIndex;
+                                          }
+                                        }
 
-                                  return Column(
-                                    children: [
-                                      if (userIndex == index)
-                                        const SizedBox(height: 10),
-                                      Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10),
-                                        decoration: BoxDecoration(
-                                          color: leaderboardColors(userIndex),
-                                          border:
-                                              Border.all(color: Colors.yellow),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: ListTile(
-                                          trailing: Card(
-                                            elevation: 20,
-                                            color: leaderboardColors(userIndex),
-                                            shape: const CircleBorder(),
-                                            child: SizedBox(
-                                              height: 50,
-                                              width: 50,
-                                              child: Center(
-                                                child: Text(
-                                                  formatCurrency
-                                                      .format(user["score"]),
+                                        return Column(
+                                          children: [
+                                            if (userIndex == index)
+                                              const SizedBox(height: 10),
+                                            Container(
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 15),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10),
+                                              decoration: BoxDecoration(
+                                                color: leaderboardColors(
+                                                    userIndex),
+                                                border: Border.all(
+                                                    color: Colors.yellow),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: ListTile(
+                                                trailing: Card(
+                                                  elevation: 20,
+                                                  color: leaderboardColors(
+                                                      userIndex),
+                                                  shape: const CircleBorder(),
+                                                  child: SizedBox(
+                                                    height: 50,
+                                                    width: 50,
+                                                    child: Center(
+                                                      child: Text(
+                                                        formatCurrency.format(
+                                                            user["score"]),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
+                                                title: Text(
+                                                  user["name"],
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                leading: leaderboardPositions(
+                                                    userIndex),
                                               ),
                                             ),
-                                          ),
-                                          title: Text(
-                                            user["name"],
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          leading:
-                                              leaderboardPositions(userIndex),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               );
                             } else {
                               return const Center(
