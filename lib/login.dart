@@ -232,7 +232,7 @@ Future createUser(String name, int phone) async {
     id: docUser.id,
     name: name,
     phone: phone,
-    score: 200,
+    score: 0,
   );
 
   final json = user.toJson();
