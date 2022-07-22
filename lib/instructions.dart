@@ -188,7 +188,7 @@ class _ProceedState extends State<Proceed> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        "The game will last for about an hour and the first person on the leaderboard "
+                        "The game will last for a day and the first person on the leaderboard "
                         "gets whatever he or she earned in the game as his or her highest score."
                         "\n\nGood luck!",
                         style: TextStyle(

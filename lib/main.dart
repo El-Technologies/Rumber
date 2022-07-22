@@ -111,264 +111,221 @@ class _MenuPageState extends State<MenuPage>
                     ),
                   ),
                   child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          height: size.height / 1000,
+                        ),
+                        const AutoSizeText(
+                          "Menu",
+                          style: TextStyle(
+                            fontSize: 70,
+                            color: Colors.limeAccent,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          minFontSize: 40,
+                          maxLines: 1,
+                        ),
+                        SizedBox(
+                          height: size.height / 5,
+                        ),
+                        SizedBox(
+                          height: 300,
                           child: Column(
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              SizedBox(
-                                height: size.height / 1000,
-                              ),
-                              const AutoSizeText(
-                                "Menu",
-                                style: TextStyle(
-                                  fontSize: 70,
-                                  color: Colors.limeAccent,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                minFontSize: 40,
-                                maxLines: 1,
-                              ),
-                              SizedBox(
-                                height: size.height / 5,
-                              ),
-                              SizedBox(
-                                height: 300,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ShowCaseWidget(
+                                          builder: Builder(
+                                            builder: (_) => const StartGame(),
+                                          ),
+                                        ),
+                                      ));
+                                  highestBalance = 200;
+                                  animatedHighestBalance = 200;
+                                },
+                                child: Row(
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ShowCaseWidget(
-                                                builder: Builder(
-                                                  builder: (_) =>
-                                                      const StartGame(),
-                                                ),
-                                              ),
-                                            ));
-                                        highestBalance = 200;
-                                        animatedHighestBalance = 200;
-                                      },
+                                    Container(
+                                      width: size.width * .6,
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          color: Colors.yellow,
+                                          border: Border.all(
+                                              color: Colors.white, width: 2),
+                                          borderRadius: const BorderRadius.only(
+                                              bottomLeft: Radius.circular(20),
+                                              topRight: Radius.circular(50))),
                                       child: Row(
                                         children: [
-                                          Container(
-                                            width: size.width * .6,
-                                            padding: const EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                                color: Colors.yellow,
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(20),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                50))),
-                                            child: Row(
-                                              children: [
-                                                const Image(
-                                                  image: AssetImage(
-                                                      "assets/images/play.png"),
-                                                  width: 40,
-                                                  height: 40,
-                                                ),
-                                                const SizedBox(width: 10),
-                                                Text(
-                                                  "Start",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              .07,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ],
-                                            ),
+                                          const Image(
+                                            image: AssetImage(
+                                                "assets/images/play.png"),
+                                            width: 40,
+                                            height: 40,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            "Start",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .07,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ShowCaseWidget(
-                                                builder: Builder(
-                                                  builder: (_) =>
-                                                      const Proceed(),
-                                                ),
-                                              ),
-                                            ));
-                                      },
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const Proceed(),
+                                    ),
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: size.width * .6,
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          color: Colors.yellow,
+                                          border: Border.all(
+                                              color: Colors.white, width: 2),
+                                          borderRadius: const BorderRadius.only(
+                                              bottomRight: Radius.circular(20),
+                                              topLeft: Radius.circular(50))),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          Container(
-                                            width: size.width * .6,
-                                            padding: const EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                                color: Colors.yellow,
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        bottomRight:
-                                                            Radius.circular(20),
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                50))),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  "How to Play",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              .07,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                const SizedBox(width: 10),
-                                                const Image(
-                                                  image: AssetImage(
-                                                      "assets/images/compliant.png"),
-                                                  width: 40,
-                                                  height: 40,
-                                                ),
-                                              ],
-                                            ),
+                                          Text(
+                                            "How to Play",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .07,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          const Image(
+                                            image: AssetImage(
+                                                "assets/images/compliant.png"),
+                                            width: 40,
+                                            height: 40,
                                           ),
                                         ],
                                       ),
                                     ),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ShowCaseWidget(
-                                              builder: Builder(
-                                                builder: (_) =>
-                                                    const LeaderBoard(),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () async {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ShowCaseWidget(
+                                        builder: Builder(
+                                          builder: (_) => const LeaderBoard(),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: size.width * .6,
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          color: Colors.yellow,
+                                          border: Border.all(
+                                              color: Colors.white, width: 2),
+                                          borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              bottomRight:
+                                                  Radius.circular(50))),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            width: size.width * .6,
-                                            padding: const EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                                color: Colors.yellow,
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(20),
-                                                        bottomRight:
-                                                            Radius.circular(
-                                                                50))),
-                                            child: Row(
-                                              children: [
-                                                const Image(
-                                                  image: AssetImage(
-                                                      "assets/images/competition.png"),
-                                                  width: 40,
-                                                  height: 40,
-                                                ),
-                                                const SizedBox(width: 10),
-                                                Text(
-                                                  "Score Board",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              .07,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ],
-                                            ),
+                                          const Image(
+                                            image: AssetImage(
+                                                "assets/images/competition.png"),
+                                            width: 40,
+                                            height: 40,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            "Score Board",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .07,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        quit(context);
-                                      },
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  quit(context);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      width: size.width * .6,
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                          color: Colors.yellow,
+                                          border: Border.all(
+                                              color: Colors.white, width: 2),
+                                          borderRadius: const BorderRadius.only(
+                                              topRight: Radius.circular(20),
+                                              bottomLeft: Radius.circular(50))),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          Container(
-                                            width: size.width * .6,
-                                            padding: const EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                                color: Colors.yellow,
-                                                border: Border.all(
-                                                    color: Colors.white,
-                                                    width: 2),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                        topRight:
-                                                            Radius.circular(20),
-                                                        bottomLeft:
-                                                            Radius.circular(
-                                                                50))),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  "Quit",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              .07,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                const SizedBox(width: 10),
-                                                const Image(
-                                                  image: AssetImage(
-                                                      "assets/images/log-out.png"),
-                                                  width: 40,
-                                                  height: 40,
-                                                ),
-                                              ],
-                                            ),
+                                          Text(
+                                            "Quit",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .07,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          const Image(
+                                            image: AssetImage(
+                                                "assets/images/log-out.png"),
+                                            width: 40,
+                                            height: 40,
                                           ),
                                         ],
                                       ),
@@ -379,6 +336,9 @@ class _MenuPageState extends State<MenuPage>
                             ],
                           ),
                         ),
+                      ],
+                    ),
+                  ),
                 ),
               )
             : const Login(),

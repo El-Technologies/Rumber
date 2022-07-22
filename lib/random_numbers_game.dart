@@ -269,7 +269,6 @@ class _StartGameState extends State<StartGame> {
                     shape: const StadiumBorder(),
                   ),
                   onPressed: () {
-                    // AudioUtils.disposeBGMusic();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -321,7 +320,7 @@ class _StartGameState extends State<StartGame> {
     ),
     content: Text(
       "You can view your scores or keep playing. "
-      "Play as many times as you can from 8:00 pm to 9:00 pm\n",
+      "Play as many times as you can till 8pm tomorrow\n",
       textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.white,
@@ -943,9 +942,6 @@ class _StartGameState extends State<StartGame> {
           three,
         ]),
       );
-
-      myBox.put("hasShownShowCaseView", true);
-      hasShownShowCaseView = myBox.get("hasShownShowCaseView");
     }
 
     Size size = MediaQuery.of(context).size;
@@ -1186,6 +1182,10 @@ class _StartGameState extends State<StartGame> {
                                 setState(() {
                                   if (play) showKeyPad(size, context);
                                 });
+
+                                myBox.put("hasShownShowCaseView", true);
+                                hasShownShowCaseView =
+                                    myBox.get("hasShownShowCaseView");
                               },
                               child: Container(
                                 padding: const EdgeInsets.all(10),
